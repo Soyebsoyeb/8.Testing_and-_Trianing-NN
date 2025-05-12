@@ -26,3 +26,35 @@ Optimizer_Adam: Adam optimization algorithm with learning rate decay 📉
 Uses nnfs package to generate spiral dataset 🌀
 Includes visualization of the spiral data 📈
 
+
+
+
+(1) 🧪 Run Testing
+
+
+# Generate test data
+X_test, y_test = spiral_data(samples=100, classes=3)
+
+# Forward pass
+dense1.forward(X_test)
+activation1.forward(dense1.output)
+dense2.forward(activation1.output)
+loss = loss_activation.forward(dense2.output, y_test)
+
+# Calculate metrics
+predictions = np.argmax(loss_activation.output, axis=1)
+if len(y_test.shape) == 2:
+    y_test = np.argmax(y_test, axis=1)
+accuracy = np.mean(predictions == y_test)
+
+print(f'✅ Test Results:')
+print(f'   Accuracy: {accuracy:.3f}')
+print(f'   Loss: {loss:.3f}')
+
+
+
+🔍 Interpretation
+Accuracy close to training accuracy (98% vs 99%) indicates good generalization
+Low loss value confirms model confidence in predictions
+Minimal gap between train/test performance suggests no overfitting
+
